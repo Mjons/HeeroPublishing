@@ -134,6 +134,10 @@ src/utils/management/commands/test_command.py
 # Emacs backup files
 *~
 
+# Internal docs and Claude config
+_internal/
+.claude/
+
 # docker env
 \.env
 
