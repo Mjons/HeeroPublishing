@@ -129,6 +129,33 @@ make migrate
 
 That's it. Your database content stays untouched. Only the code updates.
 
+### Keeping Your Custom Changes Safe
+
+We've made custom edits to some files (aesthetic/branding changes). When merging from upstream, these are the files to watch:
+
+**Files we customized:**
+- `src/themes/OLH/templates/core/base.html` — removed Janeway footer logo
+- `docs/hosting/` — new documentation files (won't conflict, upstream doesn't have them)
+
+**What happens during merge:**
+- **New files you added** (like docs) — merge cleanly, no risk
+- **Files only upstream changed** — merge cleanly, no risk
+- **Files BOTH you and upstream changed** — git will flag a **merge conflict**
+
+**If you get a merge conflict:**
+1. Git tells you which files have conflicts
+2. Open the file — look for `<<<<<<<`, `=======`, `>>>>>>>` markers
+3. Keep the version you want (usually your version for branding changes)
+4. Remove the conflict markers
+5. Save, then `git add .` and `git commit -m "resolve merge conflict"`
+
+**Pro tip:** Before merging, always check what files upstream changed:
+```bash
+git fetch upstream
+git diff master..upstream/master --name-only
+```
+This shows which files changed. If none of your customized files are in the list, the merge is safe.
+
 ---
 
 ## 4. What You Need to Know About the Database
